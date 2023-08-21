@@ -3,6 +3,10 @@
 
 import { IViewer, Point } from "./types";
 
+/**
+ * IViewer 显隐规则
+ * Point 方块的坐标
+ */
 export class Square { 
   // 控制显隐
   private _viewer?: IViewer;
@@ -13,14 +17,18 @@ export class Square {
 
   public set viewer(val) { 
     this._viewer = val;
+    if (val) {
+      // 如果添加了方块，就让本次添加的方块显示
+      val.show();
+    }
   }
   
-  public get Point() { 
-    return this._Point;
+  public get point() { 
+    return this._point;
   }
 
-  public set Point(val) { 
-    this._Point = val;
+  public set point(val) { 
+    this._point = val;
     // 当数据发生变化时隐藏上一次，显示这一次
     // 发生变化时显示
     if (this.viewer) {
@@ -32,7 +40,11 @@ export class Square {
     return this._color;
   }
 
-  public constructor(private _Point: Point, private _color: string) { 
+  public set color(val) { 
+    this._color = val;
+  }
+
+  public constructor(private _point: Point, private _color: string) { 
 
   }
 }

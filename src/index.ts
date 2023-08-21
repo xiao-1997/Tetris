@@ -1,33 +1,23 @@
-import { IViewer } from "./core/types";
-import { Square } from "./core/Square";
+import { Square } from "./core/Square";//小方块
+import { SquarePageViewer } from "./core/viewer/SquarePageViewer";
+import $ from "jquery";
 
-// 控制显隐的方法
-class SquareConsoleViewer implements IViewer { 
-  constructor(
-    // dom元素
-    private Square: Square
-  ) { }
-  show(): void {
-    // 显示dom元素
-    console.log(this.Square.color,this.Square.Point);
+const sq = new Square({x: 3, y: 1},'red');
+sq.viewer = new SquarePageViewer(sq, $("#root"))
+
+$('#btnDown').click(function() {
+  sq.point = {
+    x: sq.point.x,
+    y: sq.point.y + 1
   }
-  remove(): void {
-    
+})
+
+$('#btnRemove').click(function() {
+  if (sq.viewer) { 
+    sq.viewer.remove()
   }
-}
+})
 
-const sq = new Square({ x: 0, y: 0 }, 'red');
-
-sq.viewer = new SquareConsoleViewer(sq);
-
-sq.viewer.show();
-
-sq.Point = {
-  x: 6,
-  y: 4
-}
-
-sq.Point = {
-  x: 8,
-  y: 10
-}
+$('#btnAdd').click(function () {
+  sq.viewer = new SquarePageViewer(sq, $("#root"))
+})
