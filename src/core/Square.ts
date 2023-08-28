@@ -11,10 +11,20 @@ export class Square {
   // 控制显隐
   private _viewer?: IViewer;
 
+  // 颜色
+  private _color: string = '';
+
+  // 方块坐标
+  private _point: Point = {
+    x: 0,
+    y: 0,
+  };
+
   public get viewer() { 
     return this._viewer;
   }
 
+  // 如果添加了方块,就运行方块内的显隐规则
   public set viewer(val) { 
     this._viewer = val;
     if (val) {
@@ -42,9 +52,5 @@ export class Square {
 
   public set color(val) { 
     this._color = val;
-  }
-
-  public constructor(private _point: Point, private _color: string) { 
-
   }
 }

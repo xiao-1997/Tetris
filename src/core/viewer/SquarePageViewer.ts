@@ -23,7 +23,7 @@ export class SquarePageViewer implements IViewer {
     if (this.isRemove) {
       return;
     }
-    // 显示需要dom元素
+    // 如果没有dom，就创建dom对象
     if (!this.dom) {
       this.dom = $('<div>').css({
         position: "absolute",
@@ -34,6 +34,7 @@ export class SquarePageViewer implements IViewer {
       }).appendTo(this.container)
     }
 
+    // 并设置样式
     this.dom.css({
             left: this.square.point.x * PageConfig.SquareSize.width,
             top: this.square.point.y * PageConfig.SquareSize.height,

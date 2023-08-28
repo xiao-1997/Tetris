@@ -1,23 +1,15 @@
-import { Square } from "./core/Square";//小方块
+import { SquareGroup } from "./core/SquareGroup";//小方块
 import { SquarePageViewer } from "./core/viewer/SquarePageViewer";
 import $ from "jquery";
 
-const sq = new Square({x: 3, y: 1},'red');
-sq.viewer = new SquarePageViewer(sq, $("#root"))
+// 创建出要形成的方块形状
+const group = new SquareGroup(
+  [{ x: 0, y: -1 }, { x: -1, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 1 }],
+  {x: 0, y: 1},
+  "red"
+)
 
-$('#btnDown').click(function() {
-  sq.point = {
-    x: sq.point.x,
-    y: sq.point.y + 1
-  }
-})
-
-$('#btnRemove').click(function() {
-  if (sq.viewer) { 
-    sq.viewer.remove()
-  }
-})
-
-$('#btnAdd').click(function () {
-  sq.viewer = new SquarePageViewer(sq, $("#root"))
+// 把形状内的小方块显示出来
+group.squares.forEach(item => {
+  item.viewer = new SquarePageViewer(item,$('#root'));
 })
